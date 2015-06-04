@@ -6,7 +6,7 @@
       	http://cxf.apache.org/blueprint/core http://cxf.apache.org/schemas/blueprint/core.xsd
 		http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.0.0 http://aries.apache.org/schemas/blueprint-cm/blueprint-cm-1.0.0.xsd">        
 		
-	<service ref="ruleEngine" interface="com.scb.framework.rule.expression.RuleEngine" />
+	<service ref="ruleEngine" interface="com.scb.framework.rule.expression.api.RuleEngine" />
 	
 	<bean id="ruleEngine" class="com.scb.framework.rule.expression.impl.RuleEngineImpl" >
 		<property name="ruleConfigurationRepository">

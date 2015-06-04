@@ -9,6 +9,7 @@
 	<description>Workflow Engine Parent Module</description>
 	<modules>
 		<module>workflow-repository</module>
+		<module>workflow-rule-engine-api</module>
 		<module>workflow-rule-engine</module>
 	</modules>
 </project>

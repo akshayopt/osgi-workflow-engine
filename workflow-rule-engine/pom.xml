@@ -17,7 +17,7 @@
 
 	<properties>
 		<jeval.version>0.9.4</jeval.version>
-		<commons-lang3.version>3.4</commons-lang3.version>
+		<commons-lang3.version>3.3.1</commons-lang3.version>
 	</properties>
 
 	<dependencies>
@@ -39,6 +39,11 @@
 		<dependency>
 			<groupId>com.scb.workflow</groupId>
 			<artifactId>wb-lib-workflow-repository</artifactId>
+			<version>1.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.scb.workflow</groupId>
+			<artifactId>workflow-rule-engine-api</artifactId>
 			<version>1.0.0</version>
 		</dependency>
 	</dependencies>
@@ -71,12 +76,19 @@
 							org.osgi.service.blueprint,
 							org.springframework.expression,
 							org.springframework.expression.spel.standard,
-							org.slf4j
+							org.slf4j,
+							com.scb.framework.rule.expression.api
 						</Import-Package>
+						<DynamicImport-Package>*</DynamicImport-Package>
 						<Export-Package>
-							com.scb.framework.rule.expression,
-							com.scb.framework.rule.expression.impl
+							org.apache.commons.lang3,
+							org.mvel2.*,
+							org.springframework.expression.*,
+							org.apache.openjpa.persistence ,
 						</Export-Package>
+						<Private-Package>
+							com.scb.framework.rule.*
+						</Private-Package>
 					</instructions>
 				</configuration>
 			</plugin>

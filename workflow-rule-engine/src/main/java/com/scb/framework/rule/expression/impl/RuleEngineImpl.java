@@ -13,7 +13,7 @@ import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import com.scb.event.model.EventRuleMap;
 import com.scb.event.repository.RuleConfigurationRepository;
-import com.scb.framework.rule.expression.RuleEngine;
+import com.scb.framework.rule.expression.api.RuleEngine;
 import com.scb.framework.rule.model.ExpressionResolverType;
 import com.scb.framework.rule.model.RuleExecutionStatus;
 
@@ -31,14 +31,28 @@ public class RuleEngineImpl implements RuleEngine {
 
 	private final ExpressionParser spelExpressionParser = new SpelExpressionParser();
 
-	private Expression exp;
-
 	/**
 	 * Method will accept a flow id and will retrieve the rule expressions for this flow id Depending upon the resolver
 	 * type (SPEL or MVEL) it will use the respective expression resolver
+	 * Returns the String value (SUCCESS, UNFIT, ERROR)
 	 */
 	@Override
-	public <T> RuleExecutionStatus evaluateRules(final String flowId, final T payload,
+	public <T> String evaluateRules(final String flowId, final T payload,
+			final String resolverType)
+	{
+		ExpressionResolverType enumResolverType = null;
+		
+		try {
+			enumResolverType = ExpressionResolverType.valueOf(resolverType);
+			return null;
+		} catch (Exception e) {
+			logger.info("Unable to find the resolverType ::"+resolverType+" under ExpressionResolverType Enums");
+		}
+		
+		return evaluateRules(flowId,payload,enumResolverType).name();
+		
+	}
+	private <T> RuleExecutionStatus evaluateRules(final String flowId, final T payload,
 			final ExpressionResolverType resolverType) {
 		RuleExecutionStatus ruleExecutionStatus = RuleExecutionStatus.SUCCESS;
 		if (StringUtils.isNotEmpty(flowId)) {
